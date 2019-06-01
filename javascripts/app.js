@@ -1,6 +1,6 @@
 // Rover Object Goes Here
 // ======================
-
+var turn = "";
 var travelLog = [];
 var rover = {
   direction: "N",
@@ -12,18 +12,22 @@ function turnLeft(){
   switch(rover.direction){
     case "N":
       rover.direction = 'W';
+      logTurn();
       console.log("The rover direction is now " + rover.direction);
       break;
     case "W":
       rover.direction = "S";
+      logTurn();
       console.log("The rover direction is now " + rover.direction);
       break;
     case "S":
       rover.direction = "E";
+      logTurn();
       console.log("The rover direction is now " + rover.direction);
       break;
     case "E":
       rover.direction = "N";
+      logTurn();
       console.log("The rover direction is now " + rover.direction);
       break;
       }
@@ -34,18 +38,22 @@ function turnRight(){
   switch(rover.direction){
     case "N":
       rover.direction = 'E';
+      logTurn();
       console.log("The rover direction is now " + rover.direction);
       break;
     case "E":
       rover.direction = "S";
+      logTurn();
       console.log("The rover direction is now " + rover.direction);
       break;
     case "S":
       rover.direction = "W";
+      logTurn();
       console.log("The rover direction is now " + rover.direction);
       break;
     case "W":
       rover.direction = "N";
+      logTurn();
       console.log("The rover direction is now " + rover.direction);
       break;
       }
@@ -94,20 +102,25 @@ for (var i = 0; i < commands.length;i++){
     moveForward();
     break;
   case "r":
+    turn = "right: ";
     turnRight();
     break;
   case "l":
+      turn = "left: ";
       turnLeft();
     break;
     }
   }
 }
 function logMovement() {
-    travelLog.push(" " + rover.posistion);
+    travelLog.push("moved forward: " + rover.posistion);
     /*Can you please explain how the push is read in the array
     I tried two ways to push the posistion to the travelLog():
     I dont understand why pushing " " + rover.position works, 
     and why pushing just rover.postion doesnt work */ 
+}
+function logTurn() {
+  travelLog.push("turned " + turn + rover.direction)
 }
 
 function oops(movement) {
