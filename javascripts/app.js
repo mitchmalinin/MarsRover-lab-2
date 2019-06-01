@@ -62,16 +62,19 @@ function moveForward(){
     case "E":
       console.log("Move Forward was called: forward E!");
       rover.posistion[0] = rover.posistion[0]+1;
+      logMovement();
       console.log("The rover posistion is now " + rover.posistion);
       break;
     case "S":  
       console.log("Move Forward was called: forward S!");
       rover.posistion[1] = rover.posistion[1]+1;
+      logMovement();
       console.log("The rover posistion is now " + rover.posistion);
       break;
     case "W":
       console.log("Move Forward was called: forward W!");
       rover.posistion[0] = rover.posistion[0]-1;
+      logMovement();
       console.log("The rover posistion is now " + rover.posistion);
       break;
     }
@@ -100,7 +103,11 @@ for (var i = 0; i < commands.length;i++){
   }
 }
 function logMovement() {
-    travelLog.push("Rover Log: " + rover.posistion);
+    travelLog.push(" " + rover.posistion);
+    /*Can you please explain how the push is read in the array
+    I tried two ways to push the posistion to the travelLog():
+    I dont understand why pushing " " + rover.position works, 
+    and why pushing just rover.postion doesnt work */ 
 }
 
 function oops(movement) {
@@ -116,11 +123,25 @@ function oops(movement) {
 	}
 }
 
-var inst =["f","f","f","l"];
+function printTravelLog(){
+    var counter = 0;
+
+    for (var i = 0; i < travelLog.length; i++){
+        counter++;
+        console.log("Travel Cordinates " + counter + ": " + travelLog[i]);
+    }
+    console.log("End of Log");
+    console.log("===============");
+}
+
+
 rover.direction = "N";
 //var test2 = oops(moveRover(inst));
-moveRover(inst);
-console.log(travelLog);
+moveRover('rrfflff');
+console.log("===============");
+console.log("Start of Log");
+
+printTravelLog();
 
 
 
