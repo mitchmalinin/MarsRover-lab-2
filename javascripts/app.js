@@ -4,7 +4,7 @@ var turn = "";
 var travelLog = [];
 var rover = {
   direction: "N",
-  posistion: [0,0,]
+  posistion: [5,5,]
 }
 
 function turnLeft(){
@@ -63,29 +63,31 @@ function moveForward(){
   switch(rover.direction){
     case "N":
       console.log("Move Forward was called: forward N!");
-      rover.posistion[1] = rover.posistion[1]-1;
-      logMovement();
+      rover.posistion[1] = rover.posistion[1]+1;
+      //logMovement();
       console.log("The rover posistion is now " + rover.posistion);
       break;
     case "E":
       console.log("Move Forward was called: forward E!");
       rover.posistion[0] = rover.posistion[0]+1;
-      logMovement();
+      //logMovement();
       console.log("The rover posistion is now " + rover.posistion);
       break;
     case "S":  
       console.log("Move Forward was called: forward S!");
-      rover.posistion[1] = rover.posistion[1]+1;
-      logMovement();
+      rover.posistion[1] = rover.posistion[1]-1;
+      //logMovement();
       console.log("The rover posistion is now " + rover.posistion);
       break;
     case "W":
       console.log("Move Forward was called: forward W!");
       rover.posistion[0] = rover.posistion[0]-1;
-      logMovement();
+      //logMovement();
       console.log("The rover posistion is now " + rover.posistion);
       break;
     }
+
+    endBorder();
   
 }
 
@@ -94,7 +96,7 @@ function moveBackward(){
 }
 
 
-
+//Reading the commands from input and sending to proper functions
 function moveRover(commands){
 for (var i = 0; i < commands.length;i++){
   switch (commands[i]){
@@ -112,25 +114,37 @@ for (var i = 0; i < commands.length;i++){
     }
   }
 }
+
+//Logging Movement
 function logMovement() {
     travelLog.push("moved forward: " + rover.posistion);
     /*Can you please explain how the push is read in the array
     I tried two ways to push the posistion to the travelLog():
-    I dont understand why pushing " " + rover.position works, 
+    I dont understand why pushing "moved forward: " + rover.position works, 
     and why pushing just rover.postion doesnt work */ 
 }
 function logTurn() {
   travelLog.push("turned " + turn + rover.direction)
 }
+function logEnd() {
+  travelLog.push("End of Border. " + " ");
+}
 
-function oops(movement) {
-	if (rover.posistion[0] < 0 || rover.posistion[0] >= 10) {
-		console.log('Oops! your reached the border, you cannot move ' + movement);
-		rover.position[0] = 0;
-	}
-	if (rover.posistion[1] < 0) {
-		console.log('Oops! your reached the border, you cannot move ' + movement);
+function endBorder(){
+	if (rover.posistion[1] < 0 || rover.posistion[1] >= 10) {
+    logEnd();
+    console.log("==============================================");
+    console.log('You reached the border. ');
+    console.log("==============================================");
+
 		rover.posistion[1] = 0;
+	}
+	if (rover.posistion[0] < 0 || rover.posistion[0] >= 10) {
+    logEnd();
+    console.log("==============================================");
+    console.log('You reached the border.');
+    console.log("==============================================");
+		rover.posistion[0] = 0;
 	} else {
 		logMovement();
 	}
@@ -144,14 +158,17 @@ function printTravelLog(){
         console.log("Travel Cordinates " + counter + ": " + travelLog[i]);
     }
     console.log("End of Log");
-    console.log("===============");
+    console.log("==============================================");
 }
 
 
+//Tests
+
 rover.direction = "N";
-//var test2 = oops(moveRover(inst));
+console.log("Commands: 'rrfflff'");
+console.log("==============================================");
 moveRover('rrfflff');
-console.log("===============");
+console.log("==============================================");
 console.log("Start of Log");
 
 printTravelLog();
