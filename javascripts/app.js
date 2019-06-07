@@ -137,14 +137,14 @@ function endBorder(){
     console.log('You reached the border. ');
     console.log("==============================================");
 
-		rover.posistion[1] = 0;
+		rover.posistion[1] = 5;
 	}
 	if (rover.posistion[0] < 0 || rover.posistion[0] >= 10) {
     logEnd();
     console.log("==============================================");
     console.log('You reached the border.');
     console.log("==============================================");
-		rover.posistion[0] = 0;
+		rover.posistion[0] = 5;
 	} else {
 		logMovement();
 	}
